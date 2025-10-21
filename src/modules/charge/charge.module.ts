@@ -4,6 +4,8 @@ import { PrismaService } from "src/infra/database/prisma.service";
 import { ChargeRepository } from "./repositories/charge.repository";
 import { ChargePrismaRepository } from "./repositories/prisma/charge.prisma.repository";
 import { CreatedChargeUseCase } from "./useCases/created-charge.usecase";
+import { FindAllChargeUseCase } from "./useCases/findAll-charge.usecase";
+import { FindOneChargeUseCase } from "./useCases/findOne-charge.usecase";
 
 
 @Module({
@@ -11,6 +13,8 @@ import { CreatedChargeUseCase } from "./useCases/created-charge.usecase";
     controllers: [ChargeController],
     providers: [
         CreatedChargeUseCase,
+        FindAllChargeUseCase,
+        FindOneChargeUseCase,
         PrismaService,
         {
             provide: ChargeRepository,

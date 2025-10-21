@@ -16,13 +16,15 @@ export class ChargePrismaRepository implements ChargeRepository {
 
     async findOne(id: string): Promise<ChargeCreatedDto | null> {
         return await this.prismaService.charge.findUnique({
-            where: { id }
+            where: { id },
+            include: { customer: true }
         })
     }
 
     async deleteById(id: string): Promise<ChargeCreatedDto | null> {
         return await this.prismaService.charge.delete({
-            where: { id }
+            where: { id },
+            include: { customer: true }
         })
     }
 

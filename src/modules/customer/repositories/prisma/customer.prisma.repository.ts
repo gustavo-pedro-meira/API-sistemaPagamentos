@@ -10,17 +10,21 @@ export class CustomerPrismaRepository implements CustomerRepository {
     constructor(private readonly prismaService: PrismaService) {}
 
     async findAll(): Promise<CustomerCreatedDto[] | null> {
-        return await this.prismaService.customer.findMany();
+        return await this.prismaService.customer.findMany({
+            include: { charges: true }
+        });
     }
 
     async findOne(id: string): Promise<CustomerCreatedDto | null> {
         return await this.prismaService.customer.findUnique({
-            where: { id }
+            where: { id },
+            include: { charges: true }
         });
     }
     async deleteById(id: string): Promise<CustomerCreatedDto | null> {
         return await this.prismaService.customer.delete({
-            where: { id }
+            where: { id }, 
+            include: { charges: true }
         })
     }
 
