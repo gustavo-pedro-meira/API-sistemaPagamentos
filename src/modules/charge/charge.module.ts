@@ -6,6 +6,7 @@ import { ChargePrismaRepository } from "./repositories/prisma/charge.prisma.repo
 import { CreatedChargeUseCase } from "./useCases/created-charge.usecase";
 import { FindAllChargeUseCase } from "./useCases/findAll-charge.usecase";
 import { FindOneChargeUseCase } from "./useCases/findOne-charge.usecase";
+import { DeleteChargeUseCase } from "./useCases/delete-charge.usecase";
 
 
 @Module({
@@ -15,6 +16,7 @@ import { FindOneChargeUseCase } from "./useCases/findOne-charge.usecase";
         CreatedChargeUseCase,
         FindAllChargeUseCase,
         FindOneChargeUseCase,
+        DeleteChargeUseCase,
         PrismaService,
         {
             provide: ChargeRepository,
