@@ -39,7 +39,7 @@ export const CreatedCustomerSchema = z.object({
     phone: z.string({
         error: (issue) =>
             issue.input === undefined
-                ? "CPF cannot be invalid."
+                ? "Phone cannot be invalid."
                 : "Must be a string."
     })
 })
