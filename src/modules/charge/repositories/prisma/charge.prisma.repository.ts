@@ -1,0 +1,32 @@
+import { Injectable } from "@nestjs/common";
+import { ChargeRepository } from "../charge.repository";
+import { PrismaService } from "src/infra/database/prisma.service";
+import { ChargeCreatedDto, CreatedChargeDto } from "../../dto/created-charge.dto";
+
+
+@Injectable()
+export class ChargePrismaRepository implements ChargeRepository {
+    constructor(private readonly prismaService: PrismaService) {}
+
+    async findAll(): Promise<ChargeCreatedDto[] | null> {
+        return await this.prismaService.charge.findMany();
+    }
+
+    async findOne(id: string): Promise<ChargeCreatedDto | null> {
+        return await this.prismaService.charge.findUnique({
+            where: { id }
+        })
+    }
+
+    async deleteById(id: string): Promise<ChargeCreatedDto | null> {
+        return await this.prismaService.charge.delete({
+            where: { id }
+        })
+    }
+
+    async create(createdChargeDto: CreatedChargeDto): Promise<ChargeCreatedDto | null> {
+        return await this.prismaService.charge.create({
+            data: { ...createdChargeDto }
+        })
+    }
+}
