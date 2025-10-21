@@ -24,4 +24,31 @@ model Customer {
   name String
   cpf String
   phone String
+
+  charges Charge[]
+}
+
+enum ChargePaymentMethod {
+  CREDIT_CARD
+  BOLETO
+  PIX
+}
+
+enum ChargeStatus {
+  PENDING
+  PAID
+  EXPIRED
+}
+
+model Charge {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  value Float
+  coin String
+  paymentMethod ChargePaymentMethod @default(PIX)
+  status ChargeStatus @default(PENDING)
+
+  customerId String
+  customer Customer @relation(fields: [customerId], references: [id])
 }
