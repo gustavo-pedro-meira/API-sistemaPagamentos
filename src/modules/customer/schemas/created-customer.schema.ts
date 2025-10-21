@@ -1,7 +1,6 @@
 import { issue } from "node_modules/zod/v4/core/util.cjs";
 import z from "zod";
 
-
 export const CreatedCustomerSchema = z.object({
     email: z.email("Invalid email format.")
     .nonempty("Email Cannot be invalid."),
