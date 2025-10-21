@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { CustomerRepository } from "../customer.repository";
 import { PrismaService } from "src/infra/database/prisma.service";
 import { CustomerCreatedDto, CreatedCustomerDto } from "../../dto/created-customer.dto";
+import { hash } from "bcrypt";
 
 
 @Injectable()
@@ -23,8 +24,9 @@ export class CustomerPrismaRepository implements CustomerRepository {
         })
     }
     async create(createdCustomerDto: CreatedCustomerDto): Promise<CustomerCreatedDto | null> {
+        const passwordHashed = await hash(createdCustomerDto.password, 10);
         return await this.prismaService.customer.create({
-            data: { ...createdCustomerDto }
+            data: { ...createdCustomerDto, password: passwordHashed }
         })
     }
 }
