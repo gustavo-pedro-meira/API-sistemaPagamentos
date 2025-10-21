@@ -6,6 +6,7 @@ import { CustomerPrismaRepository } from "./repositories/prisma/customer.prisma.
 import { CustomerController } from "./customer.controller";
 import { FindAllCustomerUseCase } from "./useCases/findAll-customer.usecase";
 import { FindOneCustomerUseCase } from "./useCases/findOne-customer.usecase";
+import { DeleteCustomerUseCase } from "./useCases/delete-customer.usecase";
 
 
 @Module({
@@ -15,6 +16,7 @@ import { FindOneCustomerUseCase } from "./useCases/findOne-customer.usecase";
     CreatedCustomerUseCase,
     FindAllCustomerUseCase,
     FindOneCustomerUseCase,
+    DeleteCustomerUseCase,
     PrismaService,
     {
       provide: CustomerRepository,
