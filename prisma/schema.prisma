@@ -18,10 +18,10 @@ model Customer {
   id String @id @default(uuid())
   createdAt DateTime @default(now())
 
-  email String @unique
+  email String
   password String
 
   name String
-  cpf String @unique
+  cpf String
   phone String
 }
