@@ -9,7 +9,9 @@ export class ChargePrismaRepository implements ChargeRepository {
     constructor(private readonly prismaService: PrismaService) {}
 
     async findAll(): Promise<ChargeCreatedDto[] | null> {
-        return await this.prismaService.charge.findMany();
+        return await this.prismaService.charge.findMany({
+            include: { customer: true }
+        });
     }
 
     async findOne(id: string): Promise<ChargeCreatedDto | null> {

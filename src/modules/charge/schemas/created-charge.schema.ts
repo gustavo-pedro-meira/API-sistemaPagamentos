@@ -19,7 +19,7 @@ export const CreatedChargeSchema = z.object({
                 : "Must be a string."
     }),
 
-    status: z.nativeEnum(ChargeStatus),
+    status: z.nativeEnum(ChargeStatus).optional(),
 
     paymentMethod: z.nativeEnum(ChargePaymentMethod),
 
