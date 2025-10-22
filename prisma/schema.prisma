@@ -49,6 +49,13 @@ model Charge {
   paymentMethod ChargePaymentMethod @default(PIX)
   status ChargeStatus @default(PENDING)
 
+  boletoDueDate DateTime?
+
+  pixDueDate DateTime?
+  pixCopyCole String?
+
+  cardInstallments Int?
+
   customerId String
   customer Customer @relation(fields: [customerId], references: [id])
 }
