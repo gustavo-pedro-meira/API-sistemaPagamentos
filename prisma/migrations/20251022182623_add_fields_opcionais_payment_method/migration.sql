@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Charge" ALTER COLUMN "boletoDueDate" DROP NOT NULL,
+ALTER COLUMN "cardInstallments" DROP NOT NULL,
+ALTER COLUMN "pixCopyCole" DROP NOT NULL,
+ALTER COLUMN "pixDueDate" DROP NOT NULL;
