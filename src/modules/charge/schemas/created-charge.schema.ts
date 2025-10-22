@@ -33,4 +33,5 @@ export const CreatedChargeSchema = z.object({
     pixCopyCole: z.string().nullable(),
 
     cardInstallments: z.number().positive().nullable(),
+    cardDueDate: z.coerce.date().nullable(),
 })

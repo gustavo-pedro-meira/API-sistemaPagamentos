@@ -55,6 +55,7 @@ model Charge {
   pixCopyCole String?
 
   cardInstallments Int?
+  cardDueDate DateTime?
 
   customerId String
   customer Customer @relation(fields: [customerId], references: [id])
