@@ -38,7 +38,8 @@ export class ChargePrismaRepository implements ChargeRepository {
     async updatedById(id: string, updatedChargeDto: UpdatedChargeDto): Promise<ChargeCreatedDto | null> {
         return await this.prismaService.charge.update({
             where: { id },
-            data: { ...updatedChargeDto }
+            data: { ...updatedChargeDto },
+            include: { customer: true }
         })
     }
 }
