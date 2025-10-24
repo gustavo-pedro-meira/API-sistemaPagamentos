@@ -2,7 +2,7 @@ import { ChargePaymentMethod, ChargeStatus } from "generated/prisma";
 import z from "zod";
 
 
-export const CreatedChargeSchema = z.object({
+export const UpdatedChargeSchema = z.object({
     value: z.number({
         error: (issue) =>
             issue.input === undefined
@@ -10,22 +10,25 @@ export const CreatedChargeSchema = z.object({
                 : "Must be a number."
     })
     .positive("'The price must be greater than zero.'")
-    .multipleOf(0.01, { message: "The price must have at most 2 decimal places." }),
+    .multipleOf(0.01, { message: "The price must have at most 2 decimal places." })
+    .optional(),
 
     coin: z.string({
         error: (issue) =>
             issue.input === undefined
                 ? "Coin cannot be invalid."
                 : "Must be a string."
-    }),
+    })
+    .optional(),
 
     status: z.nativeEnum(ChargeStatus).optional(),
 
-    paymentMethod: z.nativeEnum(ChargePaymentMethod),
+    paymentMethod: z.nativeEnum(ChargePaymentMethod).optional(),
 
     customerId: z.string().uuid({
         message: "Customer ID must be a valid UUID."
-    }),
+    })
+    .optional(),
 
     boletoDueDate: z.coerce.date().nullable().optional(),
 

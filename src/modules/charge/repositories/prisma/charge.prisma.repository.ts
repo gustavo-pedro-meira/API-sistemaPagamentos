@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { ChargeRepository } from "../charge.repository";
 import { PrismaService } from "src/infra/database/prisma.service";
 import { ChargeCreatedDto, CreatedChargeDto } from "../../dto/created-charge.dto";
+import { UpdatedChargeDto } from "../../dto/updated-charge.dto";
 
 
 @Injectable()
@@ -31,6 +32,13 @@ export class ChargePrismaRepository implements ChargeRepository {
     async create(createdChargeDto: CreatedChargeDto): Promise<ChargeCreatedDto | null> {
         return await this.prismaService.charge.create({
             data: { ...createdChargeDto }
+        })
+    }
+
+    async updatedById(id: string, updatedChargeDto: UpdatedChargeDto): Promise<ChargeCreatedDto | null> {
+        return await this.prismaService.charge.update({
+            where: { id },
+            data: { ...updatedChargeDto }
         })
     }
 }

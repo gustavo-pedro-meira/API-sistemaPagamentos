@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { CreatedChargeUseCase } from "./useCases/created-charge.usecase";
 import { CreatedChargeDto } from "./dto/created-charge.dto";
 import { FindAllChargeUseCase } from "./useCases/findAll-charge.usecase";
 import { FindOneChargeUseCase } from "./useCases/findOne-charge.usecase";
 import { DeleteChargeUseCase } from "./useCases/delete-charge.usecase";
+import { UpdatedChargeUseCase } from "./useCases/updated-charge.usecase";
+import { UpdatedChargeDto } from "./dto/updated-charge.dto";
 
 
 @Controller("charges")
@@ -13,6 +15,7 @@ export class ChargeController {
         private readonly findAllChargeUseCase: FindAllChargeUseCase,
         private readonly findOneChargeUseCase: FindOneChargeUseCase,
         private readonly deleteChargeUseCase: DeleteChargeUseCase,
+        private readonly updatedChargeUseCase: UpdatedChargeUseCase,
     ) {}
 
     @Post()
@@ -31,7 +34,12 @@ export class ChargeController {
     }
 
     @Delete(":id")
-    deleteCharge(@Param("id") id:string) {
+    deleteCharge(@Param("id") id: string) {
         return this.deleteChargeUseCase.deleteCharge(id);
+    }
+
+    @Put(":id")
+    updatedCharge(@Param("id") id: string, @Body() updatedChargeDto: UpdatedChargeDto) {
+        return this.updatedChargeUseCase.updatedCharge(id, updatedChargeDto);
     }
 }
