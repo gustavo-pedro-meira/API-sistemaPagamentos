@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { ChargeRepository } from "../charge.repository";
 import { PrismaService } from "src/infra/database/prisma.service";
 import { ChargeCreatedDto, CreatedChargeDto } from "../../dto/created-charge.dto";
@@ -16,6 +16,13 @@ export class ChargePrismaRepository implements ChargeRepository {
     }
 
     async findOne(id: string): Promise<ChargeCreatedDto | null> {
+        const chargeExist = await this.prismaService.charge.findUnique({
+            where: { id }
+        })
+        if (!chargeExist) {
+            throw new NotFoundException("Charge not found.")
+        }
+
         return await this.prismaService.charge.findUnique({
             where: { id },
             include: { customer: true }
@@ -23,6 +30,13 @@ export class ChargePrismaRepository implements ChargeRepository {
     }
 
     async deleteById(id: string): Promise<ChargeCreatedDto | null> {
+        const chargeExist = await this.prismaService.charge.findUnique({
+            where: { id }
+        });
+        if (!chargeExist) {
+            throw new NotFoundException("Charge not found.")
+        }
+
         return await this.prismaService.charge.delete({
             where: { id },
             include: { customer: true }
@@ -36,6 +50,13 @@ export class ChargePrismaRepository implements ChargeRepository {
     }
 
     async updatedById(id: string, updatedChargeDto: UpdatedChargeDto): Promise<ChargeCreatedDto | null> {
+        const chargeExist = await this.prismaService.charge.findUnique({
+            where: { id }
+        })
+        if (!chargeExist) {
+            throw new NotFoundException("Charge not found.");
+        }
+        
         return await this.prismaService.charge.update({
             where: { id },
             data: { ...updatedChargeDto },

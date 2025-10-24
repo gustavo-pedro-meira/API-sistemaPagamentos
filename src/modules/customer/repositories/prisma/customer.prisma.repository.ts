@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from "@nestjs/common";
+import { ConflictException, Injectable, NotFoundException } from "@nestjs/common";
 import { CustomerRepository } from "../customer.repository";
 import { PrismaService } from "src/infra/database/prisma.service";
 import { CustomerCreatedDto, CreatedCustomerDto } from "../../dto/created-customer.dto";
@@ -16,12 +16,26 @@ export class CustomerPrismaRepository implements CustomerRepository {
     }
 
     async findOne(id: string): Promise<CustomerCreatedDto | null> {
+        const customerExist = await this.prismaService.customer.findUnique({
+            where: { id }
+        })
+        if(!customerExist) {
+            throw new NotFoundException("Customer not found.")
+        }
+
         return await this.prismaService.customer.findUnique({
             where: { id },
             include: { charges: true }
         });
     }
     async deleteById(id: string): Promise<CustomerCreatedDto | null> {
+        const customerExist = await this.prismaService.customer.findUnique({
+            where: { id }
+        })
+        if(!customerExist) {
+            throw new NotFoundException("Customer not found.")
+        }
+
         return await this.prismaService.customer.delete({
             where: { id }, 
             include: { charges: true }
