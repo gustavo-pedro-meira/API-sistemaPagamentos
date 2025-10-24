@@ -30,7 +30,7 @@ export const UpdatedChargeSchema = z.object({
     })
     .optional(),
 
-    boletoCode: z.coerce.date().nullable().optional(),
+    boletoCode: z.coerce.string().nullable().optional(),
 
     pixCopyCole: z.string().nullable().optional(),
 
