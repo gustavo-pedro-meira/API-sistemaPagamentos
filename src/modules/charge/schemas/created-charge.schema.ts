@@ -27,7 +27,7 @@ export const CreatedChargeSchema = z.object({
         message: "Customer ID must be a valid UUID."
     }),
 
-    chargeDueDate: z.coerce.date().nullable().optional(),
+    boletoCode: z.coerce.date().nullable().optional(),
 
     pixCopyCole: z.string().nullable().optional(),
 

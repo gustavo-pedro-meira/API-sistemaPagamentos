@@ -48,9 +48,10 @@ model Charge {
   coin String
   paymentMethod ChargePaymentMethod @default(PIX)
   status ChargeStatus @default(PENDING)
-  chargeDueDate DateTime?
 
   pixCopyCole String?
+
+  boletoCode String?
 
   cardInstallments Int?
 
