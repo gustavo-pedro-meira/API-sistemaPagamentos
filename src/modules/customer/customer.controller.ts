@@ -4,6 +4,7 @@ import { CreatedCustomerDto } from "./dto/created-customer.dto";
 import { FindAllCustomerUseCase } from "./useCases/findAll-customer.usecase";
 import { FindOneCustomerUseCase } from "./useCases/findOne-customer.usecase";
 import { DeleteCustomerUseCase } from "./useCases/delete-customer.usecase";
+import { Public } from "nest-keycloak-connect";
 
 
 @Controller("customers")
@@ -21,6 +22,7 @@ export class CustomerController {
     }
 
     @Get()
+    @Public()
     allCustomer(){
         return this.findAllCustomerUseCase.findAllCustomer();
     }

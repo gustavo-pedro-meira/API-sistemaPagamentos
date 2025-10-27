@@ -18,12 +18,12 @@ model Customer {
   id String @id @default(uuid())
   createdAt DateTime @default(now())
 
-  email String
-  password String
+  // email String
+  // password String
 
-  name String
-  cpf String
-  phone String
+  // name String
+  // cpf String
+  // phone String
 
   charges Charge[]
 }
