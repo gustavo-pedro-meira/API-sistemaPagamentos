@@ -56,11 +56,9 @@ export class CustomerPrismaRepository implements CustomerRepository {
         if(verifyCustomerCPFExist) {
             throw new ConflictException("CPF is already in use.")
         }
-
-        const passwordHashed = await hash(createdCustomerDto.password, 10);
         
         return await this.prismaService.customer.create({
-            data: { ...createdCustomerDto, password: passwordHashed }
+            data: { ...createdCustomerDto }
         })
     }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Req } from "@nestjs/common";
 import { CreatedCustomerUseCase } from "./useCases/created-customer.usecase";
 import { CreatedCustomerDto } from "./dto/created-customer.dto";
 import { FindAllCustomerUseCase } from "./useCases/findAll-customer.usecase";
@@ -35,5 +35,12 @@ export class CustomerController {
     @Delete(":id")
     deleteCustomer(@Param("id") id: string) {
         return this.deleteCustomerUseCase.deleteCustomer(id);
+    }
+
+    @Get("profile")
+    getCustomerProfile(@Req() req) {
+        const userKeycloack = req.user;
+        const keycloakId = userKeycloack.sub;
+        return this.findOneCustomerUseCase.findOneCustomer(keycloakId);
     }
 }

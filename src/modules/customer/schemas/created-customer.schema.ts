@@ -5,19 +5,26 @@ export const CreatedCustomerSchema = z.object({
     email: z.email("Invalid email format.")
     .nonempty("Email Cannot be invalid."),
 
-    password: z.string({
+    // password: z.string({
+    //     error: (issue) =>
+    //         issue.input === undefined
+    //             ? 'Password cannot be invalid.'
+    //             : 'Must be a string.'
+    // })
+    // .min(8, { message: "Password must be at least 8 characters long." })
+    // .refine(value => !value.includes(' '), { message: "Password cannot contain spaces." })
+    // .refine(value => /[#$%&*@!?\-"]/.test(value), { message: "Password must contain special characters." })
+    // .refine(value => /\d/.test(value), { message: "Password must contain numbers." })
+    // .refine(value => /[A-Z]/.test(value), { message: "Password must contain uppercase letters." })
+    // .refine(value => /[a-z]/.test(value), { message: "Password must contain lowercase letters." })
+    // .trim(),
+
+    sub: z.string({
         error: (issue) =>
             issue.input === undefined
-                ? 'Password cannot be invalid.'
-                : 'Must be a string.'
-    })
-    .min(8, { message: "Password must be at least 8 characters long." })
-    .refine(value => !value.includes(' '), { message: "Password cannot contain spaces." })
-    .refine(value => /[#$%&*@!?\-"]/.test(value), { message: "Password must contain special characters." })
-    .refine(value => /\d/.test(value), { message: "Password must contain numbers." })
-    .refine(value => /[A-Z]/.test(value), { message: "Password must contain uppercase letters." })
-    .refine(value => /[a-z]/.test(value), { message: "Password must contain lowercase letters." })
-    .trim(),
+                ? "Sub cannot be invalid."
+                : "Must be a string."
+    }),
 
     name: z.string({
         error: (issue) =>

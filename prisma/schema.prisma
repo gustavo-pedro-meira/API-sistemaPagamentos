@@ -17,13 +17,13 @@ datasource db {
 model Customer {
   id String @id @default(uuid())
   createdAt DateTime @default(now())
+  sub String @unique
 
-  // email String
-  // password String
+  email String
 
-  // name String
-  // cpf String
-  // phone String
+  name String
+  cpf String
+  phone String
 
   charges Charge[]
 }

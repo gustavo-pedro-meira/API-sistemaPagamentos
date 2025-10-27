@@ -5,7 +5,7 @@ import { IsDate, IsString } from "class-validator";
 
 export class CreatedCustomerDto extends createZodDto(CreatedCustomerSchema) {}
 
-export class CustomerCreatedDto extends CreatedCustomerDto {
+export class CustomerCreatedDto {
     @IsString()
     id: string;
 
