@@ -2,97 +2,50 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# API - Sistema de Pagamentos
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Uma API RESTful construída com [NestJS](https://github.com/nestjs/nest) para gerenciar clientes e cobranças em um sistema de pagamentos. Utiliza Prisma como ORM para interagir com um banco de dados PostgreSQL e Docker para facilitar a configuração do ambiente de desenvolvimento.
 
-## Description
+## Funcionalidades
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+* **Gerenciamento de Clientes:**
+    * Criar novos clientes (com validação de e-mail e CPF únicos e hash de senha)
+    * Listar todos os clientes
+    * Buscar um cliente específico por ID
+    * Excluir um cliente por ID
+* **Gerenciamento de Cobranças:**
+    * Criar novas cobranças associadas a um cliente
+    * Listar todas as cobranças
+    * Buscar uma cobrança específica por ID
+    * Atualizar informações de uma cobrança por ID
+    * Excluir uma cobrança por ID
+* **Validação de Dados:** Utiliza Zod para validação robusta dos dados de entrada nas requisições.
+* **Banco de Dados:** Integração com PostgreSQL através do Prisma ORM.
+* **Dockerização:** Configuração com Docker e Docker Compose para fácil execução do ambiente (API + Banco de Dados).
 
-## Project setup
+## Tecnologias Utilizadas
 
-```bash
-$ npm install
-```
+* **Framework:** NestJS
+* **Linguagem:** TypeScript
+* **Banco de Dados:** PostgreSQL
+* **ORM:** Prisma
+* **Validação:** Zod
+* **Containerização:** Docker, Docker Compose
+* **Hashing de Senha:** Bcrypt
 
-## Compile and run the project
+## Configuração do Projeto
 
-```bash
-# development
-$ npm run start
+### Pré-requisitos
 
-# watch mode
-$ npm run start:dev
+* Node.js (versão 20 ou superior recomendada)
+* npm (ou yarn/pnpm)
+* Docker e Docker Compose
 
-# production mode
-$ npm run start:prod
-```
+### Instalação das Dependências
 
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Clone o repositório e instale as dependências do projeto:
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+git clone <url-do-seu-repositorio>
+cd API-sistemaPagamentos-master
+npm install
