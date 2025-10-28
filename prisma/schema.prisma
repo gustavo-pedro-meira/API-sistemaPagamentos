@@ -19,12 +19,6 @@ model Customer {
   createdAt DateTime @default(now())
   sub String @unique
 
-  email String
-
-  name String
-  cpf String
-  phone String
-
   charges Charge[]
 }
 

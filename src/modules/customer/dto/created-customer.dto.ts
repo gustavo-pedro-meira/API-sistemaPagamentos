@@ -1,11 +1,11 @@
 import { createZodDto } from "nestjs-zod";
-import { CreatedCustomerSchema } from "../schemas/created-customer.schema";
+import { CreateCustomerProfileSchema } from "../schemas/created-customer.schema";
 import { IsDate, IsString } from "class-validator";
 
 
-export class CreatedCustomerDto extends createZodDto(CreatedCustomerSchema) {}
+export class CreateCustomerProfileDto extends createZodDto(CreateCustomerProfileSchema) {}
 
-export class CustomerCreatedDto {
+export class CustomerProfileDto {
     @IsString()
     id: string;
 

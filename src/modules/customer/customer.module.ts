@@ -7,6 +7,7 @@ import { CustomerController } from "./customer.controller";
 import { FindAllCustomerUseCase } from "./useCases/findAll-customer.usecase";
 import { FindOneCustomerUseCase } from "./useCases/findOne-customer.usecase";
 import { DeleteCustomerUseCase } from "./useCases/delete-customer.usecase";
+import { FindProfileCustomerUseCase } from "./useCases/find-profile.customer.usecase";
 
 
 @Module({
@@ -17,6 +18,7 @@ import { DeleteCustomerUseCase } from "./useCases/delete-customer.usecase";
     FindAllCustomerUseCase,
     FindOneCustomerUseCase,
     DeleteCustomerUseCase,
+    FindProfileCustomerUseCase,
     PrismaService,
     {
       provide: CustomerRepository,

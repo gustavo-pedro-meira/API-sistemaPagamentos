@@ -1,9 +1,7 @@
 import { issue } from "node_modules/zod/v4/core/util.cjs";
 import z from "zod";
 
-export const CreatedCustomerSchema = z.object({
-    email: z.email("Invalid email format.")
-    .nonempty("Email Cannot be invalid."),
+export const CreateCustomerProfileSchema = z.object({
 
     // password: z.string({
     //     error: (issue) =>
@@ -25,27 +23,4 @@ export const CreatedCustomerSchema = z.object({
                 ? "Sub cannot be invalid."
                 : "Must be a string."
     }),
-
-    name: z.string({
-        error: (issue) =>
-            issue.input === undefined
-                ? "Name cannot be invalid."
-                : "Must be a string."
-    }),
-
-    cpf: z.string({
-        error: (issue) =>
-            issue.input === undefined
-                ? "CPF cannot be invalid."
-                : "Must be a string."
-    })
-    .min(11)
-    .max(11),
-
-    phone: z.string({
-        error: (issue) =>
-            issue.input === undefined
-                ? "Phone cannot be invalid."
-                : "Must be a string."
-    })
 })
