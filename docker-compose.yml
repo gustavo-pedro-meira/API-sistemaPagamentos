@@ -30,8 +30,6 @@ services:
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
-      KC_HOSTNAME: keycloack
-      KC_HOSTNAME_ADMIN_URL: http://localhost:8080 
       KC_DB: postgres
       KC_DB_URL_HOST: db
       KC_DB_URL_DATABASE: keycloak_db

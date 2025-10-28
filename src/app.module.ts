@@ -13,7 +13,7 @@ import { CustomerCreateGuardKeyCloack } from './modules/customer/guards/customer
     ChargeModule,
     ScheduleModule.forRoot(),
     KeycloakConnectModule.register({
-      authServerUrl: "http://keycloak:8080",
+      authServerUrl: "http://localhost:8080",
       realm: "minha-api-pagamentos",
       clientId: "minha-api-pagamentos",
       secret: "8MsVeCdkKqtJ5Iq54riOM2OtITL2dift",
