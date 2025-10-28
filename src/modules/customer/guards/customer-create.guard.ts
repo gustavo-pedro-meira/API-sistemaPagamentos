@@ -33,7 +33,7 @@ export class CustomerCreateGuardKeyCloack implements CanActivate {
         const keycloakSub = keycloakUser.sub;
         const keycloakEmail = keycloakUser.email;
         const keycloakName = keycloakUser.name;
-        const keycloakCpf= keycloakSub.cpf;
+        const keycloakCpf= keycloakUser.cpf;
 
         try {
             let profile = await this.findProfileCustomerUseCase.findProfileCustomer(keycloakSub);

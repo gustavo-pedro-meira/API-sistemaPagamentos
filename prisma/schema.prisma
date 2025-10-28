@@ -20,8 +20,8 @@ model Customer {
   sub String @unique
 
   email String @unique
-  name String?
-  cpf String?
+  name String
+  cpf String
 
   charges Charge[]
 }
