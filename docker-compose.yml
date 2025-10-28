@@ -35,6 +35,7 @@ services:
       KC_DB_URL_DATABASE: keycloak_db
       KC_DB_USERNAME: postgres_user
       KC_DB_PASSWORD: 123456
+      KC_HOSTNAME: localhost
     ports:
       - "8080:8080"
     depends_on:
