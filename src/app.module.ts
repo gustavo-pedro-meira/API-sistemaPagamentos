@@ -5,6 +5,7 @@ import { ChargeModule } from './modules/charge/charge.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AuthGuard, KeycloakConnectModule, PolicyEnforcementMode, ResourceGuard, RoleGuard, TokenValidation } from 'nest-keycloak-connect';
 import { APP_GUARD } from '@nestjs/core';
+import { CustomerCreateGuardKeyCloack } from './modules/customer/guards/customer-create.guard';
 
 @Module({
   imports: [
@@ -34,7 +35,7 @@ import { APP_GUARD } from '@nestjs/core';
     {
       provide: APP_GUARD,
       useClass: RoleGuard,
-    }
+    },
   ],
 })
 export class AppModule {}

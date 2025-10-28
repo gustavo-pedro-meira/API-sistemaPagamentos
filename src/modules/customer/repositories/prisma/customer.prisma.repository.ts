@@ -27,16 +27,11 @@ export class CustomerPrismaRepository implements CustomerRepository {
         });
     }
 
-    // --- NOVO MÉTODO ESSENCIAL ---
-    /**
-     * Encontra um perfil de cliente pelo ID do Keycloak ('sub')
-     */
-    async findBySub(sub: string): Promise<CustomerProfileDto | null> { // Mude o tipo de retorno
+    async findBySub(sub: string): Promise<CustomerProfileDto | null> {
         const customerProfile = await this.prismaService.customer.findUnique({
-            where: { sub: sub }, // Busca pelo campo 'sub'
+            where: { sub: sub },
             include: { charges: true }
         });
-        // Não lançamos NotFoundException aqui intencionalmente
         return customerProfile;
     }
 
@@ -54,12 +49,9 @@ export class CustomerPrismaRepository implements CustomerRepository {
         });
     }
 
-    // --- MÉTODO 'CREATE' MODIFICADO ---
-    // Recebe um DTO com dados do perfil, incluindo o 'sub' do Keycloak
     async create(createProfileDto: CreateCustomerProfileDto): Promise<CustomerProfileDto | null> {
-        // Salve os dados do perfil, incluindo o 'sub'
         return await this.prismaService.customer.create({
-            data: { ...createProfileDto } // Nova linha - O DTO já deve conter 'sub'
+            data: { ...createProfileDto }
         });
     }
 }
