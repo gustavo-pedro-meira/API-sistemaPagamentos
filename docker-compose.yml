@@ -1,31 +1,58 @@
 version: '3.8'
 
 services:
-  back_end:
+  backend:
     build: .
-    container_name: api-pag
-    ports:
-      - '3000:3000'
-    environment:
-      - DB_HOST=db 
-      - DB_PORT=5432
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=123456
-      - DB_DATABASE=nest-crud
+    container_name: backend-api-pagamento
     depends_on:
-      - db 
-    
-  db:
-    image: postgres:13
-    container_name: postgres-pag
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_DB=nest-crud
+      - bd_backend
     ports:
-      - '5433:5432'
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://admin:123456@bd-api-pagamento:5432/crud-api-pagamento
+
+  bd_backend:
+    image: postgres:15-alpine
+    container_name: bd-api-pagamento
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=crud-api-pagamento
     volumes:
-    - postgres_data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+
+  keycloak:
+    image: quay.io/keycloak/keycloak
+    command: start-dev
+    container_name: keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HOSTNAME: keycloack
+      KC_HOSTNAME_ADMIN_URL: http://localhost:8080 
+      KC_DB: postgres
+      KC_DB_URL_HOST: db
+      KC_DB_URL_DATABASE: keycloak_db
+      KC_DB_USERNAME: postgres_user
+      KC_DB_PASSWORD: 123456
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    container_name: keycloak_db
+    environment:
+      POSTGRES_DB: keycloak_db
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - keycloak-postgres-data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
+  keycloak-postgres-data:
+    driver: local
+  pgdata:
