@@ -31,6 +31,9 @@ export class CustomerCreateGuardKeyCloack implements CanActivate {
         }
 
         const keycloakSub = keycloakUser.sub;
+        const keycloakEmail = keycloakUser.email;
+        const keycloakName = keycloakUser.name;
+        const keycloakCpf= keycloakSub.cpf;
 
         try {
             let profile = await this.findProfileCustomerUseCase.findProfileCustomer(keycloakSub);
@@ -39,6 +42,9 @@ export class CustomerCreateGuardKeyCloack implements CanActivate {
                 console.log(`ProfileSyncGuard: Profile for sub ${keycloakSub} not found. Creating...`);
                 const newProfileData: CreateCustomerProfileDto = {
                     sub: keycloakSub,
+                    email: keycloakEmail,
+                    name: keycloakName,
+                    cpf: keycloakCpf,
                 };
 
                 profile = await this.createdCustomerUseCase.saveCustomer(newProfileData);

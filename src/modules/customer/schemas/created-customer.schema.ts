@@ -23,4 +23,21 @@ export const CreateCustomerProfileSchema = z.object({
                 ? "Sub cannot be invalid."
                 : "Must be a string."
     }),
+
+    email: z.email("Invalid email format.")
+    .nonempty("Email Cannot be invalid."),
+
+        name: z.string({
+        error: (issue) =>
+            issue.input === undefined
+                ? "Name cannot be invalid."
+                : "Must be a string."
+    }),
+
+    cpf: z.string({
+        error: (issue) =>
+            issue.input === undefined
+                ? "CPF cannot be invalid."
+                : "Must be a string."
+    }),
 })
