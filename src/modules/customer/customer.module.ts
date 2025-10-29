@@ -10,6 +10,7 @@ import { DeleteCustomerUseCase } from "./useCases/delete-customer.usecase";
 import { FindProfileCustomerUseCase } from "./useCases/find-profile.customer.usecase";
 import { APP_GUARD } from "@nestjs/core";
 import { CustomerCreateGuardKeyCloack } from "./guards/customer-create.guard";
+import { GetTestCustomerUseCase } from "./useCases/getTest-customer.usecase";
 
 
 @Module({
@@ -21,6 +22,7 @@ import { CustomerCreateGuardKeyCloack } from "./guards/customer-create.guard";
     FindOneCustomerUseCase,
     DeleteCustomerUseCase,
     FindProfileCustomerUseCase,
+    GetTestCustomerUseCase,
     PrismaService,
     {
       provide: CustomerRepository,

@@ -5,6 +5,7 @@ import { FindAllCustomerUseCase } from "./useCases/findAll-customer.usecase";
 import { FindOneCustomerUseCase } from "./useCases/findOne-customer.usecase";
 import { DeleteCustomerUseCase } from "./useCases/delete-customer.usecase";
 import { Public } from "nest-keycloak-connect";
+import { GetTestCustomerUseCase } from "./useCases/getTest-customer.usecase";
 
 
 @Controller("customers")
@@ -14,6 +15,7 @@ export class CustomerController {
         private readonly findAllCustomerUseCase: FindAllCustomerUseCase,
         private readonly findOneCustomerUseCase: FindOneCustomerUseCase,
         private readonly deleteCustomerUseCase: DeleteCustomerUseCase,
+        private readonly getTestCustomerUseCase: GetTestCustomerUseCase,
     ) {}
 
     @Post()
@@ -24,16 +26,22 @@ export class CustomerController {
     @Get()
     @Public()
     allCustomer(){
-        return this.findAllCustomerUseCase.findAllCustomer();
+        return this.findAllCustomerUseCase.execute();
     }
 
     @Get(":id")
     oneCustomer(@Param("id") id: string) {
-        return this.findOneCustomerUseCase.findOneCustomer(id);
+        return this.findOneCustomerUseCase.execute(id);
     }
 
     @Delete(":id")
     deleteCustomer(@Param("id") id: string) {
         return this.deleteCustomerUseCase.deleteCustomer(id);
+    }
+
+    @Get("hello/tests")
+    @Public()
+    getTest() {
+        return this.getTestCustomerUseCase.execute();
     }
 }

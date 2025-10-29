@@ -6,7 +6,7 @@ import { CustomerRepository } from "../repositories/customer.repository";
 export class FindOneCustomerUseCase {
     constructor(private readonly customerRepository: CustomerRepository) {}
 
-    async findOneCustomer(id: string) {
+    async execute(id: string) {
         return await this.customerRepository.findOne(id);
     }
 }
