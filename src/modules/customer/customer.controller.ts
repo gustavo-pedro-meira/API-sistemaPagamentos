@@ -15,12 +15,11 @@ export class CustomerController {
         private readonly findAllCustomerUseCase: FindAllCustomerUseCase,
         private readonly findOneCustomerUseCase: FindOneCustomerUseCase,
         private readonly deleteCustomerUseCase: DeleteCustomerUseCase,
-        private readonly getTestCustomerUseCase: GetTestCustomerUseCase,
     ) {}
 
     @Post()
     createdCustomer(@Body() createdCustomerDto: CreateCustomerProfileDto) {
-        return this.createdCustomerUseCase.saveCustomer(createdCustomerDto);
+        return this.createdCustomerUseCase.execute(createdCustomerDto);
     }
 
     @Get()
@@ -36,12 +35,6 @@ export class CustomerController {
 
     @Delete(":id")
     deleteCustomer(@Param("id") id: string) {
-        return this.deleteCustomerUseCase.deleteCustomer(id);
-    }
-
-    @Get("hello/tests")
-    @Public()
-    getTest() {
-        return this.getTestCustomerUseCase.execute();
+        return this.deleteCustomerUseCase.execute(id);
     }
 }

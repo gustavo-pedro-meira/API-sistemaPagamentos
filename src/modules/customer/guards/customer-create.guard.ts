@@ -47,7 +47,7 @@ export class CustomerCreateGuardKeyCloack implements CanActivate {
                     cpf: keycloakCpf,
                 };
 
-                profile = await this.createdCustomerUseCase.saveCustomer(newProfileData);
+                profile = await this.createdCustomerUseCase.execute(newProfileData);
                 if (!profile) {
                      console.error(`ProfileSyncGuard: Failed to create profile for sub ${keycloakSub} after Keycloak login.`);
                      throw new InternalServerErrorException('Failed to create customer profile.');

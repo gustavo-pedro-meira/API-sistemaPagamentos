@@ -11,8 +11,6 @@ services:
       - "3000:3000"
     environment:
       - DATABASE_URL=postgresql://admin:123456@bd_backend:5432/crud-api-pagamento
-      - KEYCLOAK_AUTH_URL=http://keycloak:8080
-
 
   bd_backend:
     image: postgres:15-alpine
@@ -38,7 +36,10 @@ services:
       KC_DB_URL_DATABASE: keycloak_db
       KC_DB_USERNAME: postgres_user
       KC_DB_PASSWORD: 123456
-      # KC_HOSTNAME: localhost
+      KC_HOSTNAME_STRICT: "false"
+      KC_HOSTNAME_STRICT_HTTPS: "false"
+      KC_HTTP_ENABLED: "true"
+      KC_PROXY: edge
     ports:
       - "8080:8080"
     depends_on:

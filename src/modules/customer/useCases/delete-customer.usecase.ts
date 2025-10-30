@@ -6,7 +6,7 @@ import { CustomerRepository } from "../repositories/customer.repository";
 export class DeleteCustomerUseCase {
     constructor(private readonly customerRepository: CustomerRepository) {}
 
-    async deleteCustomer(id: string) {
+    async execute(id: string) {
         return await this.customerRepository.deleteById(id);
     }
 }

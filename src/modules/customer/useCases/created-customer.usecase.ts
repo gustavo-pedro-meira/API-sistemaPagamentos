@@ -7,7 +7,7 @@ import { CreateCustomerProfileDto } from "../dto/created-customer.dto";
 export class CreatedCustomerUseCase {
     constructor(private readonly customerRepository: CustomerRepository) {}
 
-    async saveCustomer(createdCustomerDto: CreateCustomerProfileDto) {
+    async execute(createdCustomerDto: CreateCustomerProfileDto) {
         return await this.customerRepository.create(createdCustomerDto);
     }
 }
