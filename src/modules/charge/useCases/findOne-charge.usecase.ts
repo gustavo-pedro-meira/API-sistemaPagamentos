@@ -6,7 +6,7 @@ import { ChargeRepository } from "../repositories/charge.repository";
 export class FindOneChargeUseCase {
     constructor(private readonly chargeRepository: ChargeRepository) {}
 
-    async findOneCharge(id: string) {
+    async execute(id: string) {
         return await this.chargeRepository.findOne(id);
     }
 }

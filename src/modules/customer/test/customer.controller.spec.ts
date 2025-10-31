@@ -1,15 +1,16 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { CustomerController } from "./customer.controller"
-import { GetTestCustomerUseCase } from "./useCases/getTest-customer.usecase";
-import { CreatedCustomerUseCase } from "./useCases/created-customer.usecase";
-import { FindOneCustomerUseCase } from "./useCases/findOne-customer.usecase";
-import { FindAllCustomerUseCase } from "./useCases/findAll-customer.usecase";
-import { DeleteCustomerUseCase } from "./useCases/delete-customer.usecase";
-import { FindProfileCustomerUseCase } from "./useCases/find-profile.customer.usecase";
-import { CustomerRepository } from "./repositories/customer.repository";
-import { CreateCustomerProfileDto } from "./dto/created-customer.dto";
+import { CustomerController } from "../customer.controller"
+import { GetTestCustomerUseCase } from "../useCases/getTest-customer.usecase";
+import { CreatedCustomerUseCase } from "../useCases/created-customer.usecase";
+import { FindOneCustomerUseCase } from "../useCases/findOne-customer.usecase";
+import { FindAllCustomerUseCase } from "../useCases/findAll-customer.usecase";
+import { DeleteCustomerUseCase } from "../useCases/delete-customer.usecase";
+import { FindProfileCustomerUseCase } from "../useCases/find-profile.customer.usecase";
+import { CustomerRepository } from "../repositories/customer.repository";
+import { CreateCustomerProfileDto } from "../dto/created-customer.dto";
+import { Customer } from "generated/prisma";
 
-const mockCustomer: any = {
+export const mockCustomer: any = {
     id: "uuid-fake-123",
     sub: "uuid-sube-123",
     name: "Gustavo Pedro Meira",

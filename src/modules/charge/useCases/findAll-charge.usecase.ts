@@ -6,7 +6,7 @@ import { ChargeRepository } from "../repositories/charge.repository";
 export class FindAllChargeUseCase {
     constructor(private readonly chargeRepository: ChargeRepository) {}
 
-    async findAllCharge() {
+    async execute() {
         return await this.chargeRepository.findAll();
     }
 }

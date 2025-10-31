@@ -1,11 +1,11 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { GetTestCustomerUseCase } from "./useCases/getTest-customer.usecase"
-import { FindOneCustomerUseCase } from "./useCases/findOne-customer.usecase";
-import { CustomerRepository } from "./repositories/customer.repository";
-import { FindAllCustomerUseCase } from "./useCases/findAll-customer.usecase";
-import { CreatedCustomerUseCase } from "./useCases/created-customer.usecase";
-import { CreateCustomerProfileDto } from "./dto/created-customer.dto";
-import { DeleteCustomerUseCase } from "./useCases/delete-customer.usecase";
+import { GetTestCustomerUseCase } from "../useCases/getTest-customer.usecase"
+import { FindOneCustomerUseCase } from "../useCases/findOne-customer.usecase";
+import { CustomerRepository } from "../repositories/customer.repository";
+import { FindAllCustomerUseCase } from "../useCases/findAll-customer.usecase";
+import { CreatedCustomerUseCase } from "../useCases/created-customer.usecase";
+import { CreateCustomerProfileDto } from "../dto/created-customer.dto";
+import { DeleteCustomerUseCase } from "../useCases/delete-customer.usecase";
 
 const mockCustomer: any = {
     id: "uuid-fake-123",

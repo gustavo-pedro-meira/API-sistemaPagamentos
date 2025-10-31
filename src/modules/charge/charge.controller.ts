@@ -20,26 +20,26 @@ export class ChargeController {
 
     @Post()
     createdCharge(@Body() createdChargeDto: CreatedChargeDto) {
-        return this.createdChargeUseCase.saveCharge(createdChargeDto);
+        return this.createdChargeUseCase.execute(createdChargeDto);
     }
 
     @Get()
     allCharge() {
-        return this.findAllChargeUseCase.findAllCharge();
+        return this.findAllChargeUseCase.execute();
     }
 
     @Get(":id")
     oneCharge(@Param("id") id: string) {
-        return this.findOneChargeUseCase.findOneCharge(id);
+        return this.findOneChargeUseCase.execute(id);
     }
 
     @Delete(":id")
     deleteCharge(@Param("id") id: string) {
-        return this.deleteChargeUseCase.deleteCharge(id);
+        return this.deleteChargeUseCase.execute(id);
     }
 
     @Put(":id")
     updatedCharge(@Param("id") id: string, @Body() updatedChargeDto: UpdatedChargeDto) {
-        return this.updatedChargeUseCase.updatedCharge(id, updatedChargeDto);
+        return this.updatedChargeUseCase.execute(id, updatedChargeDto);
     }
 }

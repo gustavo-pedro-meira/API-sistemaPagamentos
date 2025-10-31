@@ -7,7 +7,7 @@ import { CreatedChargeDto } from "../dto/created-charge.dto";
 export class CreatedChargeUseCase {
     constructor(private readonly chargeRepository: ChargeRepository) {}
 
-    async saveCharge(createdChargeDto: CreatedChargeDto)  {
+    async execute(createdChargeDto: CreatedChargeDto)  {
         return await this.chargeRepository.create(createdChargeDto);
     }
 }

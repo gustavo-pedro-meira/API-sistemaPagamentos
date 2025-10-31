@@ -6,7 +6,7 @@ import { ChargeRepository } from "../repositories/charge.repository";
 export class DeleteChargeUseCase {
     constructor(private readonly chargeRepository: ChargeRepository) {}
 
-    async deleteCharge(id: string) {
+    async execute(id: string) {
         return await this.chargeRepository.deleteById(id);
     }
 }
