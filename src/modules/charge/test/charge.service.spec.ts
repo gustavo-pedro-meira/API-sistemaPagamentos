@@ -37,8 +37,8 @@ describe("ChargeServices", () => {
                 create: jest.fn(),
                 findAll: jest.fn().mockResolvedValue([mockCharge]),
                 findOne: jest.fn().mockResolvedValue(mockCharge),
-                deleteById: jest.fn().mockReturnValue(mockCharge),
-                updatedById: jest.fn().mockReturnValue(mockCharge),
+                deleteById: jest.fn().mockResolvedValue(mockCharge),
+                updatedById: jest.fn().mockResolvedValue(mockCharge),
             }
         }
 
@@ -99,10 +99,8 @@ describe("ChargeServices", () => {
 
     it("DeletedCharge()", async () => {
         const idTest = "uuid-charge-123";
-        (mockChargeRepository.deleteById as jest.Mock).mockResolvedValue(idTest);
-
         const resultado = await mockDeleteChargeUseCase.execute(idTest);
-        expect(resultado?.id).toBe(undefined);
+        expect(resultado).toEqual(mockCharge);
         expect(mockChargeRepository.deleteById).toHaveBeenCalledWith(idTest);
     })
 })

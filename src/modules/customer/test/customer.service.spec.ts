@@ -81,8 +81,8 @@ describe("CustomerService", () => {
 
     it("deletedCustomer()", async () => {
         const idTest = "uuid-fake-123";
-        (mockCustomerRepository.deleteById as jest.Mock).mockResolvedValue(idTest);
         const resultado = await deleteCustomerUseCase.execute(idTest);
-        expect(resultado?.id).toBe(undefined);
+        expect(resultado).toEqual(mockCustomer);
+        expect(mockCustomerRepository.deleteById).toHaveBeenCalledWith(idTest);
     })
 })
