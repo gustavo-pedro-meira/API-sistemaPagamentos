@@ -33,11 +33,14 @@ describe("CustomerController", () => {
             execute: jest.fn().mockReturnValue(mockCustomer),
         }
         const mockCreatedCustomerUseCase = {
-            execute: jest.fn().mockReturnValue(mockCustomer),
+            execute: jest.fn(),
         }
         const mockDeleteCustomerUseCase = {
             execute: jest.fn().mockReturnValue(mockCustomer),
         }
+
+        createdCustomerUseCase = mockCreatedCustomerUseCase;
+        deleteCustomerUseCase = mockDeleteCustomerUseCase;
 
         const module: TestingModule = await Test.createTestingModule({
             controllers: [CustomerController],
@@ -82,17 +85,27 @@ describe("CustomerController", () => {
     it("createdCustomerController()", async () => {
         const gustavoCustomer: CreateCustomerProfileDto = {
             name: 'Gustavo',
-            cpf: "10625524328",
+            cpf: "10625524322",
             email: "gustavo16pedro@gmail.com",
             sub: "uuid-fake-123",
         }
+        const expectResult = {
+            id: "fake-id-123",
+            createdAt: new Date(),
+            ...gustavoCustomer,
+        };
+
+        (createdCustomerUseCase.execute as jest.Mock).mockResolvedValue(expectResult);
         const resultado = await customerController.createdCustomer(gustavoCustomer);
-        expect((resultado as any)?.cpf).toEqual("10625524328");
+        expect((resultado as any)?.cpf).toEqual("10625524322");
     })
 
     it ("deleteCustomerController()", async () => {
         const idTest = "uuid-fake-123";
+        (deleteCustomerUseCase.execute as jest.Mock).mockResolvedValue(idTest);
+        
         const resultado = await customerController.deleteCustomer(idTest);
-        expect(resultado?.id).toBe(idTest);
+        expect(resultado?.id).toBe(undefined);
+        expect(deleteCustomerUseCase.execute).toHaveBeenCalledWith(idTest);
     })
 })

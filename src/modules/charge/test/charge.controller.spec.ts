@@ -107,8 +107,8 @@ describe("ChargeService", () => {
             createdAt: new Date(),
             ...mockPixCharge,
         };
-        (createdChargeUseCase.execute as jest.Mock).mockResolvedValue(expectedResult);
         
+        (createdChargeUseCase.execute as jest.Mock).mockResolvedValue(expectedResult);
         const resultado = await mockChargeController.createdCharge(mockPixCharge);
         expect((resultado)?.coin).toEqual("Dollar");
         expect((resultado)?.value).toEqual(70.00);
@@ -117,6 +117,7 @@ describe("ChargeService", () => {
     it("deletedCharge()", async () => {
         const idTest = "uuid-charge-123";
         (deleteChargeUseCase.execute as jest.Mock).mockResolvedValue(idTest);
+
         const resultado = await mockChargeController.deleteCharge(idTest);
         expect(resultado?.id).toBe(undefined);
         expect(deleteChargeUseCase.execute).toHaveBeenCalledWith(idTest);
