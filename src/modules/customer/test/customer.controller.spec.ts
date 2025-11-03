@@ -10,7 +10,7 @@ import { CustomerRepository } from "../repositories/customer.repository";
 import { CreateCustomerProfileDto } from "../dto/created-customer.dto";
 import { Customer } from "generated/prisma";
 
-export const mockCustomer: any = {
+const mockCustomer: any = {
     id: "uuid-fake-123",
     sub: "uuid-sube-123",
     name: "Gustavo Pedro Meira",

@@ -21,7 +21,7 @@ import { GetTestCustomerUseCase } from "./useCases/getTest-customer.usecase";
     FindAllCustomerUseCase,
     FindOneCustomerUseCase,
     DeleteCustomerUseCase,
-    // FindProfileCustomerUseCase,
+    FindProfileCustomerUseCase,
     // GetTestCustomerUseCase,
     PrismaService,
     {
