@@ -36,7 +36,7 @@ describe("ChargeServices", () => {
             useValue: {
                 create: jest.fn(),
                 findAll: jest.fn().mockResolvedValue([mockCharge]),
-                findOne: jest.fn().mockResolvedValue(mockCharge),
+                findOne: jest.fn(),
                 deleteById: jest.fn().mockResolvedValue(mockCharge),
                 updatedById: jest.fn().mockResolvedValue(mockCharge),
             }
@@ -61,18 +61,32 @@ describe("ChargeServices", () => {
         mockChargeRepository = module.get<ChargeRepository>(ChargeRepository)
     })
 
-    it("FindAll()", async () => {
-        const resultado = await mockFindAllChargeUseCase.execute();
-        expect(resultado?.length).toBe(1);
-        expect(mockChargeRepository.findAll).toHaveBeenCalled();
+    describe("Find all Charges", () => {
+        it("Return all charges", async () => {
+            const resultado = await mockFindAllChargeUseCase.execute();
+            expect(resultado?.length).toBe(1);
+            expect(mockChargeRepository.findAll).toHaveBeenCalled();
+        })
     })
 
-    it("FindOne()", async () => {
-        const idTest = "uuid-charge-123";
-        const resultado = await mockFindOneChargeUseCase.execute(idTest);
-        expect(resultado?.id).toBe(idTest);
-        expect(mockChargeRepository.findOne).toHaveBeenCalledWith(idTest);
+
+    describe("Find one Charges", () => {
+        it("Return a specific charge", async () => {
+            const idTest = "uuid-charge-123";
+            (mockChargeRepository.findOne as jest.Mock).mockResolvedValue(mockCharge);
+
+            const resultado = await mockFindOneChargeUseCase.execute(idTest);
+            expect(resultado?.id).toBe(idTest);
+            expect(mockChargeRepository.findOne).toHaveBeenCalledWith(idTest);
+        })
+
+        it("Return charge not found", async () => {
+            const idFalse = "uuid-charge-false";
+            (mockChargeRepository.findOne as jest.Mock).mockResolvedValue(null);
+            await expect(mockFindOneChargeUseCase.execute(idFalse)).rejects.toThrow("Charge not found.");
+        })
     })
+
 
     it("CreatedCharge()", async () => {
         const mockChargeBoleto: CreatedChargeDto = {

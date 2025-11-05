@@ -50,6 +50,13 @@ describe("CustomerService", () => {
         mockCustomerRepository = module.get<CustomerRepository>(CustomerRepository);
     })
 
+    it("Should be defined", () => {
+        expect(findOneCustomerUseCase).toBeDefined();
+        expect(findAllCustomerUseCase).toBeDefined();
+        expect(createdCustomerUseCase).toBeDefined();
+        expect(deleteCustomerUseCase).toBeDefined();
+    })
+
     it("findOneCustomer()", async () => {
         const idTest = "uuid-fake-123";
         const resultado = await findOneCustomerUseCase.execute(idTest);

@@ -7,6 +7,10 @@ export class FindOneChargeUseCase {
     constructor(private readonly chargeRepository: ChargeRepository) {}
 
     async execute(id: string) {
-        return await this.chargeRepository.findOne(id);
+        const chargeExist = await this.chargeRepository.findOne(id);
+        if (!chargeExist) { 
+            throw new NotFoundException("Charge not found.");
+        }
+        return chargeExist;
     }
 }
