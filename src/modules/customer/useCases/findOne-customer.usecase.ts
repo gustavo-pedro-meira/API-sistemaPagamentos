@@ -7,6 +7,10 @@ export class FindOneCustomerUseCase {
     constructor(private readonly customerRepository: CustomerRepository) {}
 
     async execute(id: string) {
-        return await this.customerRepository.findOne(id);
+        const customerExist = await this.customerRepository.findOne(id);
+        if (!customerExist) {
+            throw  new NotFoundException("Customer not found.")
+        }
+        return customerExist;
     }
 }

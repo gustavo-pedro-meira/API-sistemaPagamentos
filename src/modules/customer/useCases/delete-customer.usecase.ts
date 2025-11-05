@@ -7,6 +7,10 @@ export class DeleteCustomerUseCase {
     constructor(private readonly customerRepository: CustomerRepository) {}
 
     async execute(id: string) {
-        return await this.customerRepository.deleteById(id);
+        const customerExist = await this.customerRepository.deleteById(id);
+        if (!customerExist) {
+            throw new NotFoundException("Customer not found.");
+        }
+        return customerExist;
     }
 }

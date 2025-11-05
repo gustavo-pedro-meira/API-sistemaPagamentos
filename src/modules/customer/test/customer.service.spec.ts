@@ -50,46 +50,47 @@ describe("CustomerService", () => {
         mockCustomerRepository = module.get<CustomerRepository>(CustomerRepository);
     })
 
-    it("Should be defined", () => {
-        expect(findOneCustomerUseCase).toBeDefined();
-        expect(findAllCustomerUseCase).toBeDefined();
-        expect(createdCustomerUseCase).toBeDefined();
-        expect(deleteCustomerUseCase).toBeDefined();
+    describe("Find one Customers", () => {
+        it("findOneCustomer()", async () => {
+            const idTest = "uuid-fake-123";
+            const resultado = await findOneCustomerUseCase.execute(idTest);
+            expect(resultado?.id).toBe(idTest);
+        })
+    } )
+
+    describe("Find all customers", () => {
+        it("findAllCustomer()", async () => {
+            const resultado = await findAllCustomerUseCase.execute();
+            expect(resultado).toEqual([mockCustomer]);
+        })
     })
 
-    it("findOneCustomer()", async () => {
-        const idTest = "uuid-fake-123";
-        const resultado = await findOneCustomerUseCase.execute(idTest);
-        expect(resultado?.id).toBe(idTest);
+    describe("Created customers", () => {
+        it("createdCustomer()", async () => {
+            const gustavoCustomer: CreateCustomerProfileDto = {
+                name: 'Gustavo',
+                cpf: "10625524327",
+                email: "gustavo16pedro@gmail.com",
+                sub: "uuid-fake-123",
+            }
+            const expectedResult = {
+                id: "uuid-fake-123",
+                createdAt: new Date(),
+                ...gustavoCustomer,
+            };
+
+            (mockCustomerRepository.create as jest.Mock).mockResolvedValue(expectedResult);
+            const resultado = await createdCustomerUseCase.execute(gustavoCustomer);
+            expect((resultado as any)?.cpf).toEqual("10625524327");
+        })
     })
 
-    it("findAllCustomer()", async () => {
-        const resultado = await findAllCustomerUseCase.execute();
-        expect(resultado).toEqual([mockCustomer]);
-    })
-
-    it("createdCustomer()", async () => {
-        const gustavoCustomer: CreateCustomerProfileDto = {
-            name: 'Gustavo',
-            cpf: "10625524327",
-            email: "gustavo16pedro@gmail.com",
-            sub: "uuid-fake-123",
-        }
-        const expectedResult = {
-            id: "uuid-fake-123",
-            createdAt: new Date(),
-            ...gustavoCustomer,
-        };
-
-        (mockCustomerRepository.create as jest.Mock).mockResolvedValue(expectedResult);
-        const resultado = await createdCustomerUseCase.execute(gustavoCustomer);
-        expect((resultado as any)?.cpf).toEqual("10625524327");
-    })
-
-    it("deletedCustomer()", async () => {
-        const idTest = "uuid-fake-123";
-        const resultado = await deleteCustomerUseCase.execute(idTest);
-        expect(resultado).toEqual(mockCustomer);
-        expect(mockCustomerRepository.deleteById).toHaveBeenCalledWith(idTest);
+    describe("Deleted customers", () => {
+        it("deletedCustomer()", async () => {
+            const idTest = "uuid-fake-123";
+            const resultado = await deleteCustomerUseCase.execute(idTest);
+            expect(resultado).toEqual(mockCustomer);
+            expect(mockCustomerRepository.deleteById).toHaveBeenCalledWith(idTest);
+        })
     })
 })
