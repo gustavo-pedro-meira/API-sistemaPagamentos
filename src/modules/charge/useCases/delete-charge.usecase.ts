@@ -7,6 +7,10 @@ export class DeleteChargeUseCase {
     constructor(private readonly chargeRepository: ChargeRepository) {}
 
     async execute(id: string) {
-        return await this.chargeRepository.deleteById(id);
+        const chargeExist = await this.chargeRepository.deleteById(id);
+        if(!chargeExist) {
+            throw new NotFoundException("Charge not found.");
+        }
+        return chargeExist;
     }
 }

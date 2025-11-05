@@ -37,7 +37,7 @@ describe("ChargeServices", () => {
                 create: jest.fn(),
                 findAll: jest.fn().mockResolvedValue([mockCharge]),
                 findOne: jest.fn(),
-                deleteById: jest.fn().mockResolvedValue(mockCharge),
+                deleteById: jest.fn(),
                 updatedById: jest.fn().mockResolvedValue(mockCharge),
             }
         }
@@ -88,33 +88,45 @@ describe("ChargeServices", () => {
     })
 
 
-    it("CreatedCharge()", async () => {
-        const mockChargeBoleto: CreatedChargeDto = {
-            value: 200.00,
-            coin: "Dollar",
-            paymentMethod: "BOLETO",
-            status: "PENDING",
-            pixCopyCole: null,
-            boletoCode: "code-boleto-123",
-            cardInstallments: null,
-            customerId: "uuid-customer-123",
-        }
-        const expectedResult = {
-            id: "fake-uuid-123",
-            createdAt: new Date(),
-            ...mockChargeBoleto
-        };
+    describe("Created charges", () => {
+        it("CreatedCharge()", async () => {
+            const mockChargeBoleto: CreatedChargeDto = {
+                value: 200.00,
+                coin: "Dollar",
+                paymentMethod: "BOLETO",
+                status: "PENDING",
+                pixCopyCole: null,
+                boletoCode: "code-boleto-123",
+                cardInstallments: null,
+                customerId: "uuid-customer-123",
+            }
+            const expectedResult = {
+                id: "fake-uuid-123",
+                createdAt: new Date(),
+                ...mockChargeBoleto
+            };
 
-        (mockChargeRepository.create as jest.Mock).mockResolvedValue(expectedResult);
-        const resultado = await mockCreatedChargeUseCase.execute(mockChargeBoleto);
-        expect(resultado).toEqual(expectedResult);
-        expect(resultado?.coin).toBe("Dollar")
+            (mockChargeRepository.create as jest.Mock).mockResolvedValue(expectedResult);
+            const resultado = await mockCreatedChargeUseCase.execute(mockChargeBoleto);
+            expect(resultado).toEqual(expectedResult);
+            expect(resultado?.coin).toBe("Dollar")
+        })
     })
 
-    it("DeletedCharge()", async () => {
-        const idTest = "uuid-charge-123";
-        const resultado = await mockDeleteChargeUseCase.execute(idTest);
-        expect(resultado).toEqual(mockCharge);
-        expect(mockChargeRepository.deleteById).toHaveBeenCalledWith(idTest);
+
+    describe("Deleted charges", () => {
+        it("DeletedCharge()", async () => {
+            const idTest = "uuid-charge-123";
+            (mockChargeRepository.deleteById as jest.Mock).mockResolvedValue(mockCharge);
+            const resultado = await mockDeleteChargeUseCase.execute(idTest);
+            expect(resultado).toEqual(mockCharge);
+            expect(mockChargeRepository.deleteById).toHaveBeenCalledWith(idTest);
+        })
+
+        it("Deleted charge not found", async () => {
+            const idFalse = "uuid-fake-123";
+            (mockChargeRepository.deleteById as jest.Mock).mockResolvedValue(null);
+            await expect(mockDeleteChargeUseCase.execute(idFalse)).rejects.toThrow("Charge not found.");
+        })
     })
 })
