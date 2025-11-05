@@ -6,6 +6,7 @@ import { FindAllCustomerUseCase } from "../useCases/findAll-customer.usecase";
 import { CreatedCustomerUseCase } from "../useCases/created-customer.usecase";
 import { CreateCustomerProfileDto } from "../dto/created-customer.dto";
 import { DeleteCustomerUseCase } from "../useCases/delete-customer.usecase";
+import e from "express";
 
 const mockCustomer: any = {
     id: "uuid-fake-123",
@@ -26,10 +27,10 @@ describe("CustomerService", () => {
         const mockRepositoryProvider = {
             provide: CustomerRepository,
             useValue: {
-                findOne: jest.fn().mockResolvedValue(mockCustomer),
+                findOne: jest.fn(),
                 findAll: jest.fn().mockResolvedValue([mockCustomer]),
                 create: jest.fn(),
-                deleteById: jest.fn().mockResolvedValue(mockCustomer),
+                deleteById: jest.fn(),
             }
         }
 
@@ -51,22 +52,29 @@ describe("CustomerService", () => {
     })
 
     describe("Find one Customers", () => {
-        it("findOneCustomer()", async () => {
+        it("Find one customer exist", async () => {
             const idTest = "uuid-fake-123";
+            (mockCustomerRepository.findOne as jest.Mock).mockResolvedValue(mockCustomer);
             const resultado = await findOneCustomerUseCase.execute(idTest);
             expect(resultado?.id).toBe(idTest);
+        })
+
+        it("Find one customer not found", async () => {
+            const idFalse = "uuid-customer-123";
+            (mockCustomerRepository.findOne as jest.Mock).mockResolvedValue(null);
+            await expect(findOneCustomerUseCase.execute(idFalse)).rejects.toThrow("Customer not found.");
         })
     } )
 
     describe("Find all customers", () => {
-        it("findAllCustomer()", async () => {
+        it("Find all customers", async () => {
             const resultado = await findAllCustomerUseCase.execute();
             expect(resultado).toEqual([mockCustomer]);
         })
     })
 
     describe("Created customers", () => {
-        it("createdCustomer()", async () => {
+        it("Created new customer", async () => {
             const gustavoCustomer: CreateCustomerProfileDto = {
                 name: 'Gustavo',
                 cpf: "10625524327",
@@ -86,11 +94,18 @@ describe("CustomerService", () => {
     })
 
     describe("Deleted customers", () => {
-        it("deletedCustomer()", async () => {
+        it("Deleted customer exist", async () => {
             const idTest = "uuid-fake-123";
+            (mockCustomerRepository.deleteById as jest.Mock).mockResolvedValue(mockCustomer);
             const resultado = await deleteCustomerUseCase.execute(idTest);
             expect(resultado).toEqual(mockCustomer);
             expect(mockCustomerRepository.deleteById).toHaveBeenCalledWith(idTest);
+        })
+
+        it("Deleted customer not found", async () => {
+            const idFalse = "uuid-customer-123";
+            (mockCustomerRepository.deleteById as jest.Mock).mockResolvedValue(null);
+            await expect(deleteCustomerUseCase.execute(idFalse)).rejects.toThrow("Customer not found.");
         })
     })
 })
