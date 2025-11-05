@@ -51,7 +51,7 @@ describe("CustomerService", () => {
         mockCustomerRepository = module.get<CustomerRepository>(CustomerRepository);
     })
 
-    describe("Find one Customers", () => {
+    describe("Find one customers", () => {
         it("Find one customer exist", async () => {
             const idTest = "uuid-fake-123";
             (mockCustomerRepository.findOne as jest.Mock).mockResolvedValue(mockCustomer);
