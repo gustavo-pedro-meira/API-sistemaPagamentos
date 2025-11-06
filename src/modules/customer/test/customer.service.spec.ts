@@ -7,13 +7,15 @@ import { CreatedCustomerUseCase } from "../useCases/created-customer.usecase";
 import { CreateCustomerProfileDto } from "../dto/created-customer.dto";
 import { DeleteCustomerUseCase } from "../useCases/delete-customer.usecase";
 import e from "express";
+import { Customer } from "generated/prisma";
 
-const mockCustomer: any = {
+const mockCustomer: Customer = {
     id: "uuid-fake-123",
     sub: "uuid-sube-123",
     name: "Gustavo Pedro Meira",
     email: "gustavo16pedro@gmail.com",
     cpf: "10625524328",
+    createdAt: new Date(),
 }
 
 describe("UseCases Customer", () => {

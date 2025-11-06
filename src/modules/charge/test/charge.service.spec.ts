@@ -7,9 +7,10 @@ import { FindOneChargeUseCase } from "../useCases/findOne-charge.usecase";
 import { UpdatedChargeUseCase } from "../useCases/updated-charge.usecase";
 import { Test, TestingModule } from "@nestjs/testing";
 import { CreatedChargeDto } from "../dto/created-charge.dto";
+import { Charge } from "generated/prisma";
 
 
-const mockCharge: any = {
+const mockCharge: Charge = {
     id: "uuid-charge-123",
     createdAt: new Date(),
     value: 100.50,
