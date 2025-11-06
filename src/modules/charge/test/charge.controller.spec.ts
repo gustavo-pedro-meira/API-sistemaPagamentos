@@ -79,47 +79,55 @@ describe("ChargeService", () => {
         jest.clearAllMocks();
     })
 
-    it("findOne()", async () => {
-        const idTest = "uuid-charge-123";
-        const resultado = await mockChargeController.oneCharge(idTest);
-        expect(resultado?.id).toBe(idTest);
+    describe("Find one charges", () => {
+        it("Find one charge", async () => {
+            const idTest = "uuid-charge-123";
+            const resultado = await mockChargeController.oneCharge(idTest);
+            expect(resultado?.id).toBe(idTest);
+        })
     })
 
-    it("findAll()", async () => {
-        const resultado = await mockChargeController.allCharge();
-        expect(resultado).toEqual([mockCharge]);
-        expect(resultado?.length).toBe(1);
+    describe("Find all charges", () => {
+        it("Find all charges", async () => {
+            const resultado = await mockChargeController.allCharge();
+            expect(resultado).toEqual([mockCharge]);
+            expect(resultado?.length).toBe(1);
+        })
     })
 
-    it("createdCharge()", async () => {
-        const mockPixCharge: CreatedChargeDto = {
-            value: 70.00,
-            coin: "Dollar",
-            status: "PENDING",
-            paymentMethod: "PIX",
-            pixCopyCole: "codigo-pix-321",
-            boletoCode: null,
-            cardInstallments: null,
-            customerId: "uuid-customer-321",
-        }
-        const expectedResult = {
-            id: "fake-id-abc",
-            createdAt: new Date(),
-            ...mockPixCharge,
-        };
-        
-        (createdChargeUseCase.execute as jest.Mock).mockResolvedValue(expectedResult);
-        const resultado = await mockChargeController.createdCharge(mockPixCharge);
-        expect((resultado)?.coin).toEqual("Dollar");
-        expect((resultado)?.value).toEqual(70.00);
+    describe("Created charge", () => {
+        it("Created charge", async () => {
+            const mockPixCharge: CreatedChargeDto = {
+                value: 70.00,
+                coin: "Dollar",
+                status: "PENDING",
+                paymentMethod: "PIX",
+                pixCopyCole: "codigo-pix-321",
+                boletoCode: null,
+                cardInstallments: null,
+                customerId: "uuid-customer-321",
+            }
+            const expectedResult = {
+                id: "fake-id-abc",
+                createdAt: new Date(),
+                ...mockPixCharge,
+            };
+
+            (createdChargeUseCase.execute as jest.Mock).mockResolvedValue(expectedResult);
+            const resultado = await mockChargeController.createdCharge(mockPixCharge);
+            expect((resultado)?.coin).toEqual("Dollar");
+            expect((resultado)?.value).toEqual(70.00);
+        })
     })
 
-    it("deletedCharge()", async () => {
-        const idTest = "uuid-charge-123";
-        (deleteChargeUseCase.execute as jest.Mock).mockResolvedValue(idTest);
+    describe("Deleted charge", () => {
+        it("Deleted charge", async () => {
+            const idTest = "uuid-charge-123";
+            (deleteChargeUseCase.execute as jest.Mock).mockResolvedValue(idTest);
 
-        const resultado = await mockChargeController.deleteCharge(idTest);
-        expect(resultado?.id).toBe(undefined);
-        expect(deleteChargeUseCase.execute).toHaveBeenCalledWith(idTest);
+            const resultado = await mockChargeController.deleteCharge(idTest);
+            expect(resultado?.id).toBe(undefined);
+            expect(deleteChargeUseCase.execute).toHaveBeenCalledWith(idTest);
+        })
     })
 })
