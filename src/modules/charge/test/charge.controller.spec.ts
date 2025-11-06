@@ -80,7 +80,7 @@ describe("ChargeService", () => {
     })
 
     describe("Find one charges", () => {
-        it("Find one charge", async () => {
+        it("Find one charge exist", async () => {
             const idTest = "uuid-charge-123";
             const resultado = await mockChargeController.oneCharge(idTest);
             expect(resultado?.id).toBe(idTest);
@@ -96,7 +96,7 @@ describe("ChargeService", () => {
     })
 
     describe("Created charge", () => {
-        it("Created charge", async () => {
+        it("Created new charge", async () => {
             const mockPixCharge: CreatedChargeDto = {
                 value: 70.00,
                 coin: "Dollar",
@@ -121,7 +121,7 @@ describe("ChargeService", () => {
     })
 
     describe("Deleted charge", () => {
-        it("Deleted charge", async () => {
+        it("Deleted charge exist", async () => {
             const idTest = "uuid-charge-123";
             (deleteChargeUseCase.execute as jest.Mock).mockResolvedValue(idTest);
 

@@ -73,7 +73,7 @@ describe("CustomerController", () => {
     })
 
     describe("Find all customers", () => {
-        it("findAllController()", async () => {
+        it("Find all customers", async () => {
             const resultado = await customerController.allCustomer();
             expect(resultado).toEqual([mockCustomer]);
         })
@@ -89,7 +89,7 @@ describe("CustomerController", () => {
     })
 
     describe("Created customers", () => {
-        it("createdCustomerController()", async () => {
+        it("Created new customer", async () => {
             const gustavoCustomer: CreateCustomerProfileDto = {
                 name: 'Gustavo',
                 cpf: "10625524322",
@@ -109,7 +109,7 @@ describe("CustomerController", () => {
     })
 
     describe("Deleted customers", () => {
-        it ("deleteCustomerController()", async () => {
+        it ("Deleted customer exist", async () => {
             const idTest = "uuid-fake-123";
             (deleteCustomerUseCase.execute as jest.Mock).mockResolvedValue(idTest);
 

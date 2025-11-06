@@ -89,7 +89,7 @@ describe("ChargeServices", () => {
 
 
     describe("Created charges", () => {
-        it("CreatedCharge()", async () => {
+        it("Created new charge", async () => {
             const mockChargeBoleto: CreatedChargeDto = {
                 value: 200.00,
                 coin: "Dollar",
@@ -115,7 +115,7 @@ describe("ChargeServices", () => {
 
 
     describe("Deleted charges", () => {
-        it("DeletedCharge()", async () => {
+        it("Deleted charge exist", async () => {
             const idTest = "uuid-charge-123";
             (mockChargeRepository.deleteById as jest.Mock).mockResolvedValue(mockCharge);
             const resultado = await mockDeleteChargeUseCase.execute(idTest);
