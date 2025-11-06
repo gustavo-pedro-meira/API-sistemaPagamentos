@@ -18,7 +18,7 @@ const mockCustomer: any = {
     cpf: "10625524328",
 }
 
-describe("CustomerController", () => {
+describe("Controller Customer", () => {
     let customerController: CustomerController;
     let findOneCustomerUseCase: { execute: jest.Mock };
     let findAllCustomerUseCase: { execute: jest.Mock };

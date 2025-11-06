@@ -22,7 +22,7 @@ const mockCharge: any = {
     customerId: "uuid-customer-123",
 }
 
-describe("ChargeServices", () => {
+describe("UseCase Charge", () => {
     let mockFindAllChargeUseCase: FindAllChargeUseCase;
     let mockFindOneChargeUseCase: FindOneChargeUseCase;
     let mockDeleteChargeUseCase: DeleteChargeUseCase;

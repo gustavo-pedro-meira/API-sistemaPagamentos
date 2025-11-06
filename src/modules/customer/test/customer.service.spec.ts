@@ -16,7 +16,7 @@ const mockCustomer: any = {
     cpf: "10625524328",
 }
 
-describe("CustomerService", () => {
+describe("UseCases Customer", () => {
     let findOneCustomerUseCase: FindOneCustomerUseCase;
     let findAllCustomerUseCase: FindAllCustomerUseCase;
     let createdCustomerUseCase: CreatedCustomerUseCase;

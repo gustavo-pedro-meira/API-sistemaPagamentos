@@ -21,7 +21,7 @@ const mockCharge: any = {
     customerId: "uuid-customer-123",
 }
 
-describe("ChargeService", () => {
+describe("Controller Charge", () => {
     let mockChargeController: ChargeController;
     let createdChargeUseCase: { execute: jest.Mock };
     let deleteChargeUseCase: { execute: jest.Mock };
